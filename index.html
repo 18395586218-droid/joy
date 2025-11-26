@@ -1,51 +1,67 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hollow | Emotional Closure</title>
+    <title>树洞 | 情绪疗愈</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              hollow: {
-                900: '#1c1917', // stone-900
-                800: '#292524', // stone-800
-                700: '#44403c', // stone-700
-                600: '#57534e',
-                500: '#78716c',
-                400: '#a8a29e',
-                300: '#d6d3d1',
-                200: '#e7e5e4',
-                100: '#f5f5f4',
-                50: '#fafaf9',
+              moss: {
+                950: '#0a120a', // Deepest forest dark
+                900: '#142814',
+                800: '#1e3a1e',
+                700: '#2d4f2d',
+                600: '#3f663f',
+              },
+              bark: {
+                800: '#3e2723',
+                600: '#5d4037',
+                400: '#8d6e63',
               },
               amber: {
-                glow: '#ffbf00',
+                glow: '#ffca28', // Warm light
+                dim: '#ffb300',
+              },
+              mist: {
+                100: '#e0e7df',
+                200: '#c2cdc0',
               }
             },
             fontFamily: {
-              serif: ['"Lora"', 'serif'],
+              serif: ['"Noto Serif SC"', 'serif'], // Good for Chinese
               sans: ['"Nunito Sans"', 'sans-serif'],
             },
             animation: {
-              'fade-in': 'fadeIn 1s ease-out',
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'breathe': 'breathe 8s infinite ease-in-out',
+              'fade-in': 'fadeIn 1.5s ease-out',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'breathe': 'breathe 10s infinite ease-in-out',
+              'glow': 'glow 3s ease-in-out infinite alternate',
             },
             keyframes: {
               fadeIn: {
                 '0%': { opacity: '0', transform: 'translateY(10px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
               },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
               breathe: {
-                '0%, 100%': { transform: 'scale(1)', opacity: '0.5' },
-                '50%': { transform: 'scale(1.5)', opacity: '0.2' },
+                '0%, 100%': { transform: 'scale(1)', opacity: '0.4' },
+                '50%': { transform: 'scale(1.1)', opacity: '0.7' },
+              },
+              glow: {
+                'from': { boxShadow: '0 0 10px -5px rgba(255, 202, 40, 0.1)' },
+                'to': { boxShadow: '0 0 25px 5px rgba(255, 202, 40, 0.3)' }
               }
             }
           },
@@ -54,14 +70,37 @@
     </script>
     <style>
       body {
-        background-color: #1c1917;
-        color: #e7e5e4;
-        font-family: 'Nunito Sans', sans-serif;
+        background-color: #050805; /* Very dark green/black */
+        color: #e0e7df;
+        font-family: 'Noto Serif SC', serif;
+        overflow-x: hidden;
       }
-      .glass-panel {
-        background: rgba(41, 37, 36, 0.6);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+      /* Glass effect tuned for dark forest */
+      .glass-hollow {
+        background: rgba(20, 40, 20, 0.4);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      }
+      .glass-paper {
+        background: rgba(245, 245, 240, 0.05);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      /* Background gradient wrapper */
+      .forest-bg {
+        background: radial-gradient(circle at 50% 0%, #1e3a1e 0%, #0a120a 70%);
+      }
+
+      /* Particle dust simulation */
+      .particle {
+        position: fixed;
+        width: 2px;
+        height: 2px;
+        background: rgba(255, 202, 40, 0.4);
+        border-radius: 50%;
+        pointer-events: none;
       }
     </style>
   <script type="importmap">
